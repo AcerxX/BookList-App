@@ -9,7 +9,7 @@ import {useNavigation} from "@react-navigation/core";
 const Home = ({navigation}) => {
     const {t} = useTranslation();
 
-    const {following, trending} = useData();
+    const {following, trending, setLoggedUser, setUserData} = useData();
 
     const {assets, colors, fonts, gradients, sizes} = useTheme();
 
@@ -30,7 +30,8 @@ const Home = ({navigation}) => {
                 if (userInfo === null) {
                     navigation.navigate("Login");
                 } else {
-                    console.log(userInfo);
+                    setLoggedUser(userInfo.nickname);
+                    setUserData(JSON.parse(userInfo));
                 }
             });
     }, []);

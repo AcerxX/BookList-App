@@ -120,7 +120,6 @@ export const DataProvider = ({children}: { children: React.ReactNode }) => {
     setArticles,
     article,
     handleArticle,
-
     userData,
     setUserData,
     loggedUser,

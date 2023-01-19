@@ -5,12 +5,25 @@ import {Articles, Components, Home, Profile, Pro} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 import Register from "../booklist_screens/Register";
 import Login from "../booklist_screens/Login";
+import Friends from "../booklist_screens/Friends";
+import Image from "../components/Image";
+import Block from "../components/Block";
+import {TouchableOpacity} from "react-native";
+import useTheme from "../hooks/useTheme";
+
+import {AntDesign} from '@expo/vector-icons';
+import UserProfile from "../booklist_screens/UserProfile";
+import Users from "../booklist_screens/Users";
+import {useNavigation} from "@react-navigation/core";
 
 const Stack = createStackNavigator();
 
 export default () => {
     const {t} = useTranslation();
+    const navigation = useNavigation();
     const screenOptions = useScreenOptions();
+
+    const {icons, colors, gradients, sizes} = useTheme();
 
     return (
         <Stack.Navigator screenOptions={screenOptions.stack}>
@@ -18,6 +31,23 @@ export default () => {
                 name="Home"
                 component={Home}
                 options={{title: t('navigation.home')}}
+            />
+
+            <Stack.Screen
+                name="Friends"
+                component={Friends}
+                options={{
+                    title: t('navigation.friends'),
+                    headerRight: () =>
+                        <TouchableOpacity
+                            style={{marginRight: sizes.sm}}
+                            onPress={() =>
+                                navigation.navigate("Users")
+                            }>
+                            <AntDesign name="plus" size={24} color={colors.icon}/>
+                        </TouchableOpacity>
+
+                }}
             />
 
             <Stack.Screen
@@ -38,6 +68,30 @@ export default () => {
                 name="Profile"
                 component={Profile}
                 options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name="UserProfile"
+                component={UserProfile}
+                options={{
+                    headerShown: false
+                }}
+            />
+
+            <Stack.Screen
+                name="Users"
+                component={Users}
+                options={{
+                    headerLeft: () =>
+                        <TouchableOpacity
+                            style={{marginLeft: sizes.sm}}
+                            onPress={() =>
+                                navigation.navigate("Friends")
+                            }>
+                            <AntDesign name="left" size={24} color={colors.icon}/>
+                        </TouchableOpacity>,
+                    headerRight: () => <></>
+                }}
             />
 
             <Stack.Screen

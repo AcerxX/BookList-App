@@ -95,7 +95,8 @@ const DrawerContent = (props) => {
         {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
         {name: t('screens.settings'), to: 'Pro', icon: assets.settings},
         {name: t('screens.extra'), to: 'Pro', icon: assets.extras},
-        {name: t('screens.pkrofile'), to: 'Profile', icon: assets.profile},
+        {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
+        {name: t('screens.friends'), to: 'Friends', icon: assets.profile},
     ];
 
     return (
