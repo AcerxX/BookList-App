@@ -1,6 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Platform, Linking} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import React, {useEffect, useMemo, useState} from 'react';
+import {Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 
 import {Block, Button, Image, Text} from '../components/';
@@ -9,7 +8,7 @@ import * as ApiService from "../service/ApiService";
 
 const isAndroid = Platform.OS === 'android';
 
-const UserProfile = ({route: {params: {user}}}) => {
+const UserProfile = ({route: {params: {user: {id}}}}) => {
     const {t} = useTranslation();
     const navigation = useNavigation();
     const {assets, colors, sizes} = useTheme();
@@ -27,9 +26,10 @@ const UserProfile = ({route: {params: {user}}}) => {
     const [friendRequestButtonText, setFriendRequestButtonText] = useState(t('profile.send_friend_request'));
     const [friendRequestButtonDisabled, setFriendRequestButtonDisabled] = useState(false);
     const [relationship, setRelationship] = useState({});
+    const [user, setUser] = useState({});
 
     const refreshFriendshipStatus = () => {
-        ApiService.getFriendship(userData.id, user.id)
+        ApiService.getFriendship(userData.id, id)
             .then(({data, status}) => {
                 if (status === 404) {
                     setFriendRequestButtonText(t('profile.send_friend_request'));
@@ -59,13 +59,24 @@ const UserProfile = ({route: {params: {user}}}) => {
 
     useEffect(() => {
         // TODO GET STATISTICS
+        ApiService.getUserById(id)
+            .then(({data}) => {
+                if (data) {
+                    setUser(data);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+
+                navigation.goBack();
+            })
 
         refreshFriendshipStatus();
 
     }, [navigation]);
 
     const sendFriendRequest = () => {
-        ApiService.sendFriendRequest(userData.id, user.id)
+        ApiService.sendFriendRequest(userData.id, id)
             .then(({data: {error, errorMessage}}) => {
                 if (error) {
                     alert(errorMessage);
@@ -81,7 +92,7 @@ const UserProfile = ({route: {params: {user}}}) => {
     const acceptFriendRequest = () => {
         ApiService.acceptFriendRequest(relationship.id)
             .then((_) => {
-               refreshFriendshipStatus();
+                refreshFriendshipStatus();
             })
             .catch((err) => {
                 console.error(err);
@@ -97,6 +108,40 @@ const UserProfile = ({route: {params: {user}}}) => {
             acceptFriendRequest();
         }
     }
+
+    const bookList = useMemo(() => {
+        if (user.bookshelfList) {
+            return user.bookshelfList?.flatMap((bookshelf) => {
+                return bookshelf.books;
+            });
+        } else {
+            return [];
+        }
+    }, [user]);
+
+    const authors = useMemo(() => {
+        return [...new Set(bookList.map((book) => book.author.name))]
+    }, [bookList]);
+
+    const favAuthor = useMemo(() => {
+        let tempAuthors = {};
+
+        if (bookList.length > 0) {
+            bookList.forEach((book) => {
+                if (!tempAuthors.hasOwnProperty(book.author.name)) {
+                    tempAuthors[book.author.name] = 0;
+                }
+
+                tempAuthors[book.author.name] = tempAuthors[book.author.name] + 1;
+            });
+
+            const sortedEntries = Object.entries(tempAuthors).sort((a, b) => b[1] - a[1]);
+            console.log(sortedEntries);
+            return sortedEntries[0][0];
+        } else {
+            return "N/A";
+        }
+    }, [bookList]);
 
     return (
         <Block safe marginTop={sizes.md}>
@@ -185,16 +230,16 @@ const UserProfile = ({route: {params: {user}}}) => {
                             paddingVertical={sizes.sm}
                             renderToHardwareTextureAndroid>
                             <Block align="center">
-                                <Text h5>{user?.stats?.posts || 0}</Text>
-                                <Text>{t('profile.posts')}</Text>
+                                <Text h5>{bookList.length}</Text>
+                                <Text>{t('profile.books')}</Text>
                             </Block>
                             <Block align="center">
-                                <Text h5>{(user?.stats?.followers || 0) / 1000}k</Text>
-                                <Text>{t('profile.followers')}</Text>
+                                <Text h5>{favAuthor}</Text>
+                                <Text>{t('profile.fav_author')}</Text>
                             </Block>
                             <Block align="center">
-                                <Text h5>{(user?.stats?.following || 0) / 1000}k</Text>
-                                <Text>{t('profile.following')}</Text>
+                                <Text h5>{(authors.length)}</Text>
+                                <Text>{t('profile.authors')}</Text>
                             </Block>
                         </Block>
                     </Block>
@@ -213,43 +258,57 @@ const UserProfile = ({route: {params: {user}}}) => {
                     <Block paddingHorizontal={sizes.sm} marginTop={sizes.s}>
                         <Block row align="center" justify="space-between">
                             <Text h5 semibold>
-                                {t('common.album')}
+                                {t('profile.books_subtitle')}
                             </Text>
-                            <Button>
+                            <Button onPress={() => alert("Comming soon in an app near you!")}>
                                 <Text p primary semibold>
                                     {t('common.viewall')}
                                 </Text>
                             </Button>
                         </Block>
-                        <Block row justify="space-between" wrap="wrap">
-                            <Image
-                                resizeMode="cover"
-                                source={assets?.photo1}
-                                style={{
-                                    width: IMAGE_VERTICAL_SIZE + IMAGE_MARGIN / 2,
-                                    height: IMAGE_VERTICAL_SIZE * 2 + IMAGE_VERTICAL_MARGIN,
-                                }}
-                            />
-                            <Block marginLeft={sizes.m}>
-                                <Image
-                                    resizeMode="cover"
-                                    source={assets?.photo2}
-                                    marginBottom={IMAGE_VERTICAL_MARGIN}
-                                    style={{
-                                        height: IMAGE_VERTICAL_SIZE,
-                                        width: IMAGE_VERTICAL_SIZE,
-                                    }}
-                                />
-                                <Image
-                                    resizeMode="cover"
-                                    source={assets?.photo3}
-                                    style={{
-                                        height: IMAGE_VERTICAL_SIZE,
-                                        width: IMAGE_VERTICAL_SIZE,
-                                    }}
-                                />
+
+                        {bookList.length > 0 &&
+                            <Block row justify="space-between" wrap="wrap">
+                                <Block>
+                                    {bookList.map((book, index) => {
+                                        if (index % 2 === 0) {
+                                            return <Image
+                                                key={`book-${book.id}`}
+                                                resizeMode="cover"
+                                                source={{"uri": book.imageUrl}}
+                                                style={{
+                                                    width: IMAGE_VERTICAL_SIZE,
+                                                    height: IMAGE_VERTICAL_SIZE * 1.6,
+                                                    marginBottom: sizes.m
+                                                }}
+                                            />
+                                        }
+                                    })}
+                                </Block>
+                                <Block marginLeft={sizes.m}>
+                                    {bookList.map((book, index) => {
+                                        if (index % 2 === 1) {
+                                            return <Image
+                                                key={`book-${book.id}`}
+                                                resizeMode="cover"
+                                                source={{"uri": book.imageUrl}}
+                                                style={{
+                                                    width: IMAGE_VERTICAL_SIZE,
+                                                    height: IMAGE_VERTICAL_SIZE * 1.6,
+                                                    marginBottom: sizes.m
+                                                }}
+                                            />
+                                        }
+                                    })}
+                                </Block>
                             </Block>
-                        </Block>
+                        }
+
+                        {bookList.length === 0 &&
+                            <Block center paddingHorizontal={sizes.sm}>
+                                <Text size={16} center>{t("profile.no_books_text")}</Text>
+                            </Block>
+                        }
                     </Block>
                 </Block>
             </Block>

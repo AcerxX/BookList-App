@@ -54,7 +54,7 @@ const getUserByEmail = (email) => {
 }
 
 const getUserById = (userId) => {
-    return getResource(`/rest/users/${userId}`, {
+    return getResource(`/api/user/info/${userId}`, {
         validateStatus: function (status) {
             return status < 500; // If status < 500 do now go on catch
         }
@@ -66,7 +66,7 @@ const searchUser = (searchTerm, excludedUserId) => {
 }
 
 const getFriendsList = (userId) => {
-    return getResource(`/rest/friendRelationships/search/findAllFriendsByUserId?userId=${userId}`)
+    return getResource(`/api/user/get-friends/${userId}`)
 }
 
 const getFriendRequestsList = (userId) => {

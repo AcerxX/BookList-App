@@ -1,11 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useData, useTheme, useTranslation} from '../hooks/';
-import {Block, Button, Image, Input, Product, Text} from '../components/';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Globals from "../Globals";
-import {useNavigation} from "@react-navigation/core";
-import {FlatList, TouchableOpacity, View} from "react-native";
+import {Block, Button, Text} from '../components/';
+import {FlatList, TouchableOpacity} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import * as ApiService from "../service/ApiService";
 
@@ -26,8 +23,8 @@ const Friends = ({navigation}) => {
 
     const updateFriendList = () => {
         ApiService.getFriendsList(userData.id)
-            .then(({data: {_embedded: {users}}}) => {
-                setFriends(users);
+            .then(({data}) => {
+                setFriends(data.friends);
             });
     }
 
@@ -41,18 +38,7 @@ const Friends = ({navigation}) => {
     useEffect(() => {
         updateFriendList();
         updateFriendsRequests();
-    }, [navigation]);
-
-    const handleSearchChange = (searchTerm) => {
-        if (searchTerm.length === 0) {
-            updateFriendList();
-            return;
-        }
-
-        setFriends(
-            friends.filter((user) => user.nickname.toLowerCase().includes(searchTerm.toLowerCase()))
-        )
-    }
+    }, [navigation, tab]);
 
     const FriendItem = ({nickname, onPress}) => (
         <TouchableOpacity onPress={onPress}>
