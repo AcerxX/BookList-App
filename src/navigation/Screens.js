@@ -1,13 +1,11 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Articles, Components, Home, Profile, Pro} from '../screens';
+import {Articles, Components, Home, Pro} from '../screens';
 import {useScreenOptions, useTranslation} from '../hooks';
 import Register from "../booklist_screens/Register";
 import Login from "../booklist_screens/Login";
 import Friends from "../booklist_screens/Friends";
-import Image from "../components/Image";
-import Block from "../components/Block";
 import {TouchableOpacity} from "react-native";
 import useTheme from "../hooks/useTheme";
 
@@ -15,6 +13,7 @@ import {AntDesign} from '@expo/vector-icons';
 import UserProfile from "../booklist_screens/UserProfile";
 import Users from "../booklist_screens/Users";
 import {useNavigation} from "@react-navigation/core";
+import Bookshelves from "../booklist_screens/Bookshelves";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +30,12 @@ export default () => {
                 name="Home"
                 component={Home}
                 options={{title: t('navigation.home')}}
+            />
+
+            <Stack.Screen
+                name="Bookshelves"
+                component={Bookshelves}
+                options={{title: t('navigation.bookshelves')}}
             />
 
             <Stack.Screen
@@ -63,12 +68,6 @@ export default () => {
             />
 
             <Stack.Screen name="Pro" component={Pro} options={screenOptions.pro}/>
-
-            <Stack.Screen
-                name="Profile"
-                component={Profile}
-                options={{headerShown: false}}
-            />
 
             <Stack.Screen
                 name="UserProfile"

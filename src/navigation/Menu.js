@@ -1,16 +1,10 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Alert, Animated, Linking, StyleSheet} from 'react-native';
+import {Animated, StyleSheet} from 'react-native';
 
-import {
-    useIsDrawerOpen,
-    createDrawerNavigator,
-    DrawerContentComponentProps,
-    DrawerContentOptions,
-    DrawerContentScrollView,
-} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerContentScrollView, useIsDrawerOpen,} from '@react-navigation/drawer';
 
 import Screens from './Screens';
-import {Block, Text, Switch, Button, Image} from '../components';
+import {Block, Button, Image, Text} from '../components';
 import {useData, useTheme, useTranslation} from '../hooks';
 import Globals from "../Globals";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -90,13 +84,11 @@ const DrawerContent = (props) => {
     // screen list for Drawer menu
     const screens = [
         {name: t('screens.home'), to: 'Home', icon: assets.home},
+        {name: t('screens.lists'), to: 'Bookshelves', icon: assets.components},
+        {name: t('screens.friends'), to: 'Friends', icon: assets.profile},
+
         {name: t('screens.components'), to: 'Components', icon: assets.components},
         {name: t('screens.articles'), to: 'Articles', icon: assets.document},
-        {name: t('screens.rental'), to: 'Pro', icon: assets.rental},
-        {name: t('screens.settings'), to: 'Pro', icon: assets.settings},
-        {name: t('screens.extra'), to: 'Pro', icon: assets.extras},
-        {name: t('screens.profile'), to: 'Profile', icon: assets.profile},
-        {name: t('screens.friends'), to: 'Friends', icon: assets.profile},
     ];
 
     return (

@@ -65,7 +65,8 @@
         "settings": "Settings",
         "register": "Create account",
         "extra": "Extra - Automotive",
-        "friends": "Friends"
+        "friends": "Friends",
+        "lists": "Bookshelves - Your Lists"
     },
     "navigation": {
         "home": "Soft UI",
@@ -85,7 +86,11 @@
         "login": "Login",
         "extra": "Automotive",
         "shopping": "Shopping Cart",
-        "friends": "Friends"
+        "friends": "Friends",
+        "bookshelves": "Bookshelves"
+    },
+    "bookshelves": {
+        "shelves_list": "Your Book Shelves"
     },
     "menu": {
         "started": "Getting Started",
