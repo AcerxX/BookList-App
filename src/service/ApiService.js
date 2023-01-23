@@ -97,6 +97,15 @@ const acceptFriendRequest = (relationshipId) => {
     return patchResource(`/rest/friendRelationships/${relationshipId}`, data);
 }
 
+const addBookshelf = (userId, newBookshelfName) => {
+    const data = {
+        userId: userId,
+        name: newBookshelfName
+    }
+
+    return postResource(`/api/bookshelf/add`, data);
+}
+
 export {
     registerUser,
     getUserByEmail,
@@ -106,5 +115,6 @@ export {
     getFriendship,
     sendFriendRequest,
     getFriendRequestsList,
-    acceptFriendRequest
+    acceptFriendRequest,
+    addBookshelf
 };

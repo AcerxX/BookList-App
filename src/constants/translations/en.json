@@ -1,5 +1,9 @@
 {
     "common": {
+        "error": "There was an error trying to process your request.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
         "nickname": "Nickname",
         "nicknamePlaceholder": "Enter your desired nickname",
         "appDetails": "App Details",
@@ -89,8 +93,16 @@
         "friends": "Friends",
         "bookshelves": "Bookshelves"
     },
-    "bookshelves": {
-        "shelves_list": "Your Book Shelves"
+    "shelves": {
+        "shelves_list": "Your Book Shelves",
+        "add_button": "\uD83D\uDCDA Add a BookShelf"
+    },
+    "bookshelf": {
+        "books_list": "The Books of This Shelf",
+        "add_single_button": "\uD83D\uDD0D Search for a Book",
+        "scan_barcode": "  Scan ISBN",
+        "ai_camera": "✨ Magic Vision",
+        "no_books": "This shelf has no books! \uD83D\uDE22"
     },
     "menu": {
         "started": "Getting Started",

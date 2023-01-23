@@ -13,7 +13,8 @@ import {AntDesign} from '@expo/vector-icons';
 import UserProfile from "../booklist_screens/UserProfile";
 import Users from "../booklist_screens/Users";
 import {useNavigation} from "@react-navigation/core";
-import Bookshelves from "../booklist_screens/Bookshelves";
+import Shelves from "../booklist_screens/Shelves";
+import Bookshelf from "../booklist_screens/Bookshelf";
 
 const Stack = createStackNavigator();
 
@@ -33,8 +34,8 @@ export default () => {
             />
 
             <Stack.Screen
-                name="Bookshelves"
-                component={Bookshelves}
+                name="Shelves"
+                component={Shelves}
                 options={{title: t('navigation.bookshelves')}}
             />
 
@@ -86,6 +87,23 @@ export default () => {
                             style={{marginLeft: sizes.sm}}
                             onPress={() =>
                                 navigation.navigate("Friends")
+                            }>
+                            <AntDesign name="left" size={24} color={colors.icon}/>
+                        </TouchableOpacity>,
+                    headerRight: () => <></>
+                }}
+            />
+
+            <Stack.Screen
+                name="Bookshelf"
+                component={Bookshelf}
+                options={{
+                    headerShown: false,
+                    headerLeft: () =>
+                        <TouchableOpacity
+                            style={{marginLeft: sizes.sm}}
+                            onPress={() =>
+                                navigation.navigate("Shelves")
                             }>
                             <AntDesign name="left" size={24} color={colors.icon}/>
                         </TouchableOpacity>,
