@@ -65,6 +65,10 @@ const searchUser = (searchTerm, excludedUserId) => {
     return getResource(`/rest/users/search/findUsersForFriendList?userId=${excludedUserId}&searchTerm=${searchTerm.toLowerCase()}`)
 }
 
+const searchBook = (searchTerm, userId) => {
+    return getResource(`/rest/books/search/searchBook?&searchTerm=${searchTerm.toLowerCase()}`)
+}
+
 const getFriendsList = (userId) => {
     return getResource(`/api/user/get-friends/${userId}`)
 }
@@ -116,5 +120,6 @@ export {
     sendFriendRequest,
     getFriendRequestsList,
     acceptFriendRequest,
-    addBookshelf
+    addBookshelf,
+    searchBook
 };

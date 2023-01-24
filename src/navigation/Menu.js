@@ -84,7 +84,8 @@ const DrawerContent = (props) => {
     // screen list for Drawer menu
     const screens = [
         {name: t('screens.home'), to: 'Home', icon: assets.home},
-        {name: t('screens.lists'), to: 'Shelves', icon: assets.components},
+        {name: t('screens.books_library'), to: 'BooksLibrary', icon: assets.components},
+        // {name: t('screens.lists'), to: 'Shelves', icon: assets.components},
         {name: t('screens.friends'), to: 'Friends', icon: assets.profile},
 
         {name: t('screens.components'), to: 'Components', icon: assets.components},

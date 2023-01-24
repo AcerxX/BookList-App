@@ -15,6 +15,8 @@ import Users from "../booklist_screens/Users";
 import {useNavigation} from "@react-navigation/core";
 import Shelves from "../booklist_screens/Shelves";
 import Bookshelf from "../booklist_screens/Bookshelf";
+import BooksLibrary from "../booklist_screens/BooksLibrary";
+import BrowseBooks from "../booklist_screens/BrowseBooks";
 
 const Stack = createStackNavigator();
 
@@ -63,6 +65,12 @@ export default () => {
             />
 
             <Stack.Screen
+                name="BooksLibrary"
+                component={BooksLibrary}
+                options={{title: t('navigation.books_library')}}
+            />
+
+            <Stack.Screen
                 name="Articles"
                 component={Articles}
                 options={{title: t('navigation.articles')}}
@@ -91,6 +99,24 @@ export default () => {
                             <AntDesign name="left" size={24} color={colors.icon}/>
                         </TouchableOpacity>,
                     headerRight: () => <></>
+                }}
+            />
+
+            <Stack.Screen
+                name="BrowseBooks"
+                component={BrowseBooks}
+                options={{
+                    headerTitle: "Your Books",
+                    headerTitleAlign: "center",
+                    headerLeft: () =>
+                        <TouchableOpacity
+                            style={{marginLeft: sizes.sm}}
+                            onPress={() =>
+                                navigation.navigate("BooksLibrary")
+                            }>
+                            <AntDesign name="left" size={24} color={colors.icon}/>
+                        </TouchableOpacity>,
+                    headerRight: () => null
                 }}
             />
 

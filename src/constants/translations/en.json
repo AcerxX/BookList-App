@@ -70,7 +70,8 @@
         "register": "Create account",
         "extra": "Extra - Automotive",
         "friends": "Friends",
-        "lists": "Bookshelves - Your Lists"
+        "lists": "Bookshelves - Your Lists",
+        "books_library": "Your Books"
     },
     "navigation": {
         "home": "Soft UI",
@@ -91,7 +92,8 @@
         "extra": "Automotive",
         "shopping": "Shopping Cart",
         "friends": "Friends",
-        "bookshelves": "Bookshelves"
+        "bookshelves": "Bookshelves",
+        "books_library": "Your Library"
     },
     "shelves": {
         "shelves_list": "Your Book Shelves",
@@ -99,7 +101,7 @@
     },
     "bookshelf": {
         "books_list": "The Books of This Shelf",
-        "add_single_button": "\uD83D\uDD0D Search for a Book",
+        "add_single_button": "\uD83D\uDD0D Search Your Book",
         "scan_barcode": "  Scan ISBN",
         "ai_camera": "✨ Magic Vision",
         "no_books": "This shelf has no books! \uD83D\uDE22"

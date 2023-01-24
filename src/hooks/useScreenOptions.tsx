@@ -1,9 +1,6 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {
-    StackHeaderTitleProps,
-    CardStyleInterpolators,
-} from '@react-navigation/stack';
+import {CardStyleInterpolators, StackHeaderTitleProps,} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/core';
 import {DrawerActions} from '@react-navigation/native';
 import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
@@ -26,7 +23,6 @@ export default () => {
     const menu = {
         headerStyle: {elevation: 0},
         headerTitleAlign: 'left',
-        headerTitleContainerStyle: {marginLeft: -sizes.sm},
         headerLeftContainerStyle: {paddingLeft: sizes.s},
         headerRightContainerStyle: {paddingRight: sizes.s},
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

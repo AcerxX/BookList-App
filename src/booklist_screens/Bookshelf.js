@@ -44,68 +44,67 @@ const Bookshelf = ({navigation, route: {params: {bookshelf}}}) => {
     return (
         <Block safe>
             <Block scroll>
-                <Block>
-                    <Image
-                        background
-                        style={{flex: 1, width: null, height: null}}
-                        source={assets[`card${(bookshelf.id % 4) + 1}`]}
-                    >
-                        <Block row flex={0.4} color="rgba(0,0,0,0.3)" paddingTop={sizes.padding}>
-                            <Block flex={8}>
-                                <TouchableOpacity
-                                    style={{marginLeft: sizes.sm}}
-                                    onPress={() =>
-                                        navigation.navigate("Shelves")
-                                    }>
-                                    <AntDesign name="left" size={24} color={colors.white}/>
-                                </TouchableOpacity>
-                            </Block>
+                <Image
+                    background
+                    style={{flex: 1, width: null, height: null}}
+                    source={assets[`card${(bookshelf.id % 4) + 1}`]}
+                    radius={sizes.cardRadius}
+                >
+                    <Block row flex={0.4} color="rgba(0,0,0,0.3)" paddingTop={sizes.padding}>
+                        <Block flex={8}>
+                            <TouchableOpacity
+                                style={{marginLeft: sizes.sm}}
+                                onPress={() =>
+                                    navigation.navigate("Shelves")
+                                }>
+                                <AntDesign name="left" size={24} color={colors.white}/>
+                            </TouchableOpacity>
+                        </Block>
 
-                            <Block flex={1}>
-                                <TouchableOpacity onPress={handleDelete} marginRight={sizes.sm}>
-                                    <AntDesign name="delete" size={24} color={colors.white}/>
-                                </TouchableOpacity>
-                            </Block>
+                        <Block flex={1}>
+                            <TouchableOpacity onPress={handleDelete} marginRight={sizes.sm}>
+                                <AntDesign name="delete" size={24} color={colors.white}/>
+                            </TouchableOpacity>
                         </Block>
-                        <Block flex={1} color="rgba(0,0,0,0.3)" paddingBottom={sizes.md}>
-                            <Text h3 white center>
-                                {bookshelf.name}
-                            </Text>
+                    </Block>
+                    <Block flex={1} color="rgba(0,0,0,0.3)" paddingBottom={sizes.md}>
+                        <Text h3 white center>
+                            {bookshelf.name}
+                        </Text>
+                    </Block>
+                    <Block flex={2} color="rgba(0,0,0,0.3)" paddingBottom={sizes.padding}
+                           paddingHorizontal={sizes.padding}>
+                        <Block>
+                            <Button gradient={gradients.primary} marginBottom={sizes.base}
+                                    onPress={() => null}>
+                                <Text white bold transform="uppercase">
+                                    {t('bookshelf.add_single_button')}
+                                </Text>
+                            </Button>
                         </Block>
-                        <Block flex={2} color="rgba(0,0,0,0.3)" paddingBottom={sizes.padding}
-                               paddingHorizontal={sizes.padding}>
-                            <Block>
-                                <Button gradient={gradients.primary} marginBottom={sizes.base}
-                                        onPress={() => null}>
+                        <Block row>
+                            <Block paddingRight={sizes.sm}>
+                                <Button gradient={gradients.dark} marginBottom={sizes.base}
+                                        onPress={() => alert("Comming really soon!")}>
                                     <Text white bold transform="uppercase">
-                                        {t('bookshelf.add_single_button')}
+                                        <AntDesign name="barcode" size={16} color={colors.white}/>
+                                        {t('bookshelf.scan_barcode')}
                                     </Text>
                                 </Button>
                             </Block>
-                            <Block row>
-                                <Block paddingRight={sizes.sm}>
-                                    <Button gradient={gradients.dark} marginBottom={sizes.base}
-                                            onPress={() => alert("Comming really soon!")}>
-                                        <Text white bold transform="uppercase">
-                                            <AntDesign name="barcode" size={16} color={colors.white}/>
-                                            {t('bookshelf.scan_barcode')}
-                                        </Text>
-                                    </Button>
-                                </Block>
-                                <Block>
-                                    <Button gradient={gradients.dark}
-                                            marginBottom={sizes.base}
-                                            onPress={() => alert("It's comming soon and it's gonna be ✨")}
-                                    >
-                                        <Text white bold transform="uppercase">
-                                            {t('bookshelf.ai_camera')}
-                                        </Text>
-                                    </Button>
-                                </Block>
+                            <Block>
+                                <Button gradient={gradients.dark}
+                                        marginBottom={sizes.base}
+                                        onPress={() => alert("It's comming soon and it's gonna be ✨")}
+                                >
+                                    <Text white bold transform="uppercase">
+                                        {t('bookshelf.ai_camera')}
+                                    </Text>
+                                </Button>
                             </Block>
                         </Block>
-                    </Image>
-                </Block>
+                    </Block>
+                </Image>
 
                 <Block marginVertical={sizes.sm} paddingHorizontal={sizes.sm}>
                     <Text h5 semibold>
