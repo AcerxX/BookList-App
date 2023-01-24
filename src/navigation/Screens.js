@@ -108,6 +108,7 @@ export default () => {
                 options={{
                     headerTitle: "Your Books",
                     headerTitleAlign: "center",
+                    headerTitleStyle: {fontSize: 22},
                     headerLeft: () =>
                         <TouchableOpacity
                             style={{marginLeft: sizes.sm}}
