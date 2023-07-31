@@ -5,6 +5,7 @@ import {Block, Image, Input, Text} from '../components/';
 import {FlatList, TouchableOpacity} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import * as ApiService from "../service/ApiService";
+import SearchBookItem from "../components/SearchBookItem";
 
 const BrowseBooks = ({navigation}) => {
     const {t} = useTranslation();
@@ -26,32 +27,6 @@ const BrowseBooks = ({navigation}) => {
         handleSearchChange("");
     }, [navigation]);
 
-    const BookItem = ({title, authorName, imageUrl}) => (
-        <TouchableOpacity>
-            <Block flex row justify="space-between" card marginBottom={sizes.s}>
-                <Block flex={0.22}>
-                    <Image
-                        key={`book-2`}
-                        resizeMode="cover"
-                        source={{"uri": imageUrl}}
-                        style={{
-                            width: 50,
-                            height: 50 * 1.6,
-                        }}
-                    />
-                </Block>
-                <Block flex={0.8} center>
-                    <Text size={16} semibold>{`${title}`}</Text>
-                    <Text size={16}>{authorName}</Text>
-                </Block>
-
-                <Block flex={0.07} center>
-                    <AntDesign name="right" size={16} color={colors.dark}/>
-                </Block>
-            </Block>
-        </TouchableOpacity>
-    );
-
     return (
         <Block>
             <Block color={colors.card} flex={0} padding={sizes.padding}>
@@ -64,7 +39,7 @@ const BrowseBooks = ({navigation}) => {
                     marginTop={sizes.sm}
                     data={books}
                     renderItem={({item}) => (
-                        <BookItem title={item.title} authorName={item.authorName} imageUrl={item.imageUrl}
+                        <SearchBookItem title={item.title} authorName={item.authorName} imageUrl={item.imageUrl}
                                   onPress={() => navigation.navigate("UserProfile", {user: item})}/>
                     )}
                     keyExtractor={item => item.id}

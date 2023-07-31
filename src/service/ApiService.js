@@ -110,6 +110,14 @@ const addBookshelf = (userId, newBookshelfName) => {
     return postResource(`/api/bookshelf/add`, data);
 }
 
+const scanByISBN = (isbn) => {
+    return getResource(`/api/scan/${isbn}`);
+}
+
+const searchByName = (searchTerm) => {
+    return getResource(`/api/search/${searchTerm}`);
+}
+
 export {
     registerUser,
     getUserByEmail,
@@ -121,5 +129,7 @@ export {
     getFriendRequestsList,
     acceptFriendRequest,
     addBookshelf,
-    searchBook
+    searchBook,
+    searchByName,
+    scanByISBN
 };

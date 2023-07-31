@@ -55,7 +55,7 @@ const BooksLibrary = ({navigation}) => {
                                 <Block>
                                     <Button gradient={gradients.dark}
                                             marginBottom={sizes.base}
-                                            onPress={() => alert("It's comming soon and it's gonna be ✨")}
+                                            onPress={() => navigation.navigate("AddBook")}
                                     >
                                         <Text white bold transform="uppercase">
                                             📖 Add a book

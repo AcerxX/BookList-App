@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.11.185:8001";
+const API_URL = "http://192.168.100.23:8001";
 const STORAGE_USER_KEY = "@userInfo";
 
 
