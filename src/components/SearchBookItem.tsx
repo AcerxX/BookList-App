@@ -1,10 +1,8 @@
 import {TouchableOpacity} from "react-native";
 import {Block, Image, Text} from "./index";
 import {AntDesign} from "@expo/vector-icons";
-import React, {useMemo} from "react";
-import pro from "../screens/Pro";
+import React from "react";
 import {useTheme} from "../hooks";
-import {Book} from "../booklist_screens/BookInfo";
 
 interface ISearchBookItemProps {
     title: string;

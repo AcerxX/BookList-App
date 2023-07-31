@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import {useData, useTheme, useTranslation} from '../hooks/';
-import {Block, Image, Input, Text} from '../components/';
-import {FlatList, TouchableOpacity} from "react-native";
-import {AntDesign} from "@expo/vector-icons";
+import {Block, Input, Text} from '../components/';
+import {FlatList} from "react-native";
 import * as ApiService from "../service/ApiService";
 import SearchBookItem from "../components/SearchBookItem";
 

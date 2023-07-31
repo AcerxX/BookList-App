@@ -93,8 +93,8 @@
         "shopping": "Shopping Cart",
         "friends": "Friends",
         "bookshelves": "Bookshelves",
-        "books_library": "Your Library",
-        "add_book": "Add New Book"
+      "books_library": "Your Library",
+      "add_book": "Add New Book"
     },
     "shelves": {
         "shelves_list": "Your Book Shelves",
